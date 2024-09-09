@@ -70,4 +70,7 @@ resource "helm_release" "cert_manager" {
       "values[0]", # This prevents Helm from updating values unexpectedly.
     ]
   }
+  
+  # Ensure Helm release depends on CRDs being installed
+  depends_on = [kubernetes_manifest.cert_manager_crds]
 }
