@@ -1,10 +1,44 @@
 openapi: 3.0.3
 info:
-  title: OpenAPI schema for template walrus-template-template
+  title: OpenAPI schema for template .
 components:
   schemas:
     variables:
       type: object
+      required:
+      - namespace
+      properties:
+        namespace:
+          title: Namespace
+          type: string
+          description: Namespace where Cert-Manager will be installed.
+          x-walrus-ui:
+            group: Basic
+            order: 2
+        helm_release_name:
+          title: Helm Release Name
+          type: string
+          description: Name for the Cert-Manager Helm release.
+          default: cert-manager
+          x-walrus-ui:
+            group: Basic
+            order: 3
+        helm_release_version:
+          title: Helm Release Version
+          type: string
+          description: Version of the Cert-Manager Helm chart.
+          default: 1.15.3
+          x-walrus-ui:
+            group: Basic
+            order: 4
+        cert_manager_crds_url:
+          title: Cert Manager Crds Url
+          type: string
+          description: URL to the Cert-Manager CRDs YAML file.
+          default: https://github.com/cert-manager/cert-manager/releases/download/v1.15.3/cert-manager.crds.yaml
+          x-walrus-ui:
+            group: Basic
+            order: 5
       x-walrus-ui:
         groupOrder:
         - Basic

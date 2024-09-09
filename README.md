@@ -1,11 +1,18 @@
-# Awesome Walrus Template
+# Cert-Manager Template
 
-Start here to create an awesome Walrus template.
+Terraform module which deploys Cert-Manager on any kubernetes cluster.
 
 ## Usage
 
 ```hcl
+module "cert_manager" {
+  source = "./modules/cert-manager"
 
+  cert_manager_crds_url = "https://github.com/cert-manager/cert-manager/releases/download/v1.15.3/cert-manager.crds.yaml" # URL to the Cert-Manager CRDs YAML file
+  namespace             = "cert-manager" # Namespace where Cert-Manager will be installed  
+  helm_release_name     = "cert-manager" # Name for the Cert-Manager Helm release
+  helm_release_version  = "1.15.3" # Version of the Cert-Manager Helm chart
+}
 ```
 
 ## Examples
@@ -22,27 +29,37 @@ Please read our [contributing guide](./docs/CONTRIBUTING.md) if you're intereste
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.7 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 2.23.0 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | >= 2.11.0 |
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | >= 2.23.0 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | >= 2.11.0 |
 
 ## Modules
 
-| Name | Source | Version |
-|------|--------|---------|
-| <a name="module_submodule"></a> [submodule](#module\_submodule) | ./modules/submodule | n/a |
+No modules.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [kubernetes_namespace.example](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) | resource |
+| [helm_release.example](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_context"></a> [context](#input\_context) | Receive contextual information. When Walrus deploys, Walrus will inject specific contextual information into this field.<br><br>Examples:<pre>context:<br>  project:<br>    name: string<br>    id: string<br>  environment:<br>    name: string<br>    id: string<br>  resource:<br>    name: string<br>    id: string</pre> | `map(any)` | `{}` | no |
+| <a name="input_cert_manager_crds_url"></a> [cert_manager_crds_url](#input_cert_manager_crds_url) | URL to the Cert-Manager CRDs YAML file. | `string` | `"https://github.com/cert-manager/cert-manager/releases/download/v1.15.3/cert-manager.crds.yaml"` | no |
+| <a name="input_namespace"></a> [namespace](#input_namespace) | Namespace where Cert-Manager will be installed. | `string` | `"ccp-common"` | no |
+| <a name="input_helm_release_name"></a> [helm_release_name](#input_helm_release_name) | Name for the Cert-Manager Helm release. | `string` | `"cert-manager"` | no |
+| <a name="input_helm_release_version"></a> [helm_release_version](#input_helm_release_version) | Version of the Cert-Manager Helm chart. | `string` | `"1.12.3"` | no |
+
 
 ## Outputs
 
