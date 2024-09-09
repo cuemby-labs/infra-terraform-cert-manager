@@ -28,7 +28,7 @@ EOF
 # Cert-Manager
 #
 
-variable "namespace" {
+variable "namespace_name" {
   description = "Namespace where Cert-Manager will be installed."
   type        = string
 }
