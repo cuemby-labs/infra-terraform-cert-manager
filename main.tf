@@ -12,15 +12,6 @@ module "submodule" {
 # Install Cert-Manager using Helm
 #
 
-resource "kubernetes_namespace" "this" {
-  metadata {
-    name = var.namespace_name
-  }
-  lifecycle {
-    ignore_changes = [metadata]
-  }
-}
-
 resource "helm_release" "this" {
   name       = var.helm_release_name
   repository = "https://charts.jetstack.io"
