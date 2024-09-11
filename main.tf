@@ -9,36 +9,6 @@ module "submodule" {
 }
 
 #
-# Fetch Cert-Manager CRDs from the specified URL
-#
-
-data "http" "cert_manager_crds" {
-  url = var.cert_manager_crds_url
-}
-
-#
-# Process the CRDs
-#
-
-locals {
-  crds_list = split("---", data.http.cert_manager_crds.response_body)
-  crds      = [for crd in local.crds_list : yamldecode(crd) if trimspace(crd) != ""]
-}
-
-#
-# Apply CRDs using the kubernetes_manifest resource
-#
-
-resource "kubernetes_manifest" "cert_manager_crds" {
-  count    = length(local.crds)
-  manifest = local.crds[count.index]
-
-  lifecycle {
-    ignore_changes = [manifest]
-  }
-}
-
-#
 # Install Cert-Manager using Helm
 #
 
@@ -58,13 +28,10 @@ resource "helm_release" "cert_manager" {
   version    = var.helm_release_version
   namespace  = var.namespace_name
 
-  values = [file("values.yaml")]
+  values = [file("${path.module}/values.yaml")]
 
   set {
     name  = "installCRDs"
     value = true
   }
-
-  # Ensure Helm release depends on CRDs being installed
-  depends_on = [kubernetes_manifest.cert_manager_crds]
 }

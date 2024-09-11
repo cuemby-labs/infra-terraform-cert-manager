@@ -58,7 +58,7 @@ No modules.
 | <a name="input_cert_manager_crds_url"></a> [cert_manager_crds_url](#input_cert_manager_crds_url) | URL to the Cert-Manager CRDs YAML file. | `string` | `"https://github.com/cert-manager/cert-manager/releases/download/v1.15.3/cert-manager.crds.yaml"` | no |
 | <a name="input_namespace_name"></a> [namespace_name](#input_namespace_name) | Namespace where Cert-Manager will be installed. | `string` | `"ccp-common"` | no |
 | <a name="input_helm_release_name"></a> [helm_release_name](#input_helm_release_name) | Name for the Cert-Manager Helm release. | `string` | `"cert-manager"` | no |
-| <a name="input_helm_release_version"></a> [helm_release_version](#input_helm_release_version) | Version of the Cert-Manager Helm chart. | `string` | `"1.12.3"` | no |
+| <a name="input_helm_release_version"></a> [helm_release_version](#input_helm_release_version) | Version of the Cert-Manager Helm chart. | `string` | `"1.15.3"` | no |
 
 
 ## Outputs

@@ -44,9 +44,3 @@ variable "helm_release_version" {
   type        = string
   default     = "1.15.3"
 }
-
-variable "cert_manager_crds_url" {
-  description = "URL to the Cert-Manager CRDs YAML file."
-  type        = string
-  default     = "https://github.com/cert-manager/cert-manager/releases/download/v1.15.3/cert-manager.crds.yaml"
-}

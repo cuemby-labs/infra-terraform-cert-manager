@@ -6,10 +6,10 @@ components:
     variables:
       type: object
       required:
-      - namespace
+      - namespace_name
       properties:
-        namespace:
-          title: Namespace
+        namespace_name:
+          title: Namespace Name
           type: string
           description: Namespace where Cert-Manager will be installed.
           x-walrus-ui:
@@ -31,14 +31,6 @@ components:
           x-walrus-ui:
             group: Basic
             order: 4
-        cert_manager_crds_url:
-          title: Cert Manager Crds Url
-          type: string
-          description: URL to the Cert-Manager CRDs YAML file.
-          default: https://github.com/cert-manager/cert-manager/releases/download/v1.15.3/cert-manager.crds.yaml
-          x-walrus-ui:
-            group: Basic
-            order: 5
       x-walrus-ui:
         groupOrder:
         - Basic
