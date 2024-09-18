@@ -65,7 +65,6 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_submodule"></a> [submodule](#output\_submodule) | The message from submodule. |
 | <a name="output_walrus_environment_id"></a> [walrus\_environment\_id](#output\_walrus\_environment\_id) | The id of environment where deployed in Walrus. |
 | <a name="output_walrus_environment_name"></a> [walrus\_environment\_name](#output\_walrus\_environment\_name) | The name of environment where deployed in Walrus. |
 | <a name="output_walrus_project_id"></a> [walrus\_project\_id](#output\_walrus\_project\_id) | The id of project where deployed in Walrus. |

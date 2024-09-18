@@ -1,18 +1,14 @@
-locals {
-  context = var.context
-}
-
-module "submodule" {
-  source = "./modules/submodule"
-
-  message = "Hello, submodule"
-}
-
 #
 # Install Cert-Manager using Helm
 #
 
-resource "helm_release" "this" {
+resource "kubernetes_namespace" "cert_manager" {
+  metadata {
+    name = var.namespace_name
+  }
+}
+
+resource "helm_release" "cert_manager" {
   name       = var.helm_release_name
   repository = "https://charts.jetstack.io"
   chart      = "cert-manager"
@@ -25,4 +21,12 @@ resource "helm_release" "this" {
     name  = "installCRDs"
     value = true
   }
+}
+
+#
+# Walrus information
+#
+
+locals {
+  context = var.context
 }

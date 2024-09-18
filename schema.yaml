@@ -5,16 +5,15 @@ components:
   schemas:
     variables:
       type: object
-      required:
-      - namespace_name
       properties:
         namespace_name:
           title: Namespace Name
           type: string
           description: Namespace where Cert-Manager will be installed.
+          default: cert-manager
           x-walrus-ui:
             group: Basic
-            order: 2
+            order: 1
         helm_release_name:
           title: Helm Release Name
           type: string
@@ -22,7 +21,7 @@ components:
           default: cert-manager
           x-walrus-ui:
             group: Basic
-            order: 3
+            order: 2
         helm_release_version:
           title: Helm Release Version
           type: string
@@ -30,7 +29,7 @@ components:
           default: 1.15.3
           x-walrus-ui:
             group: Basic
-            order: 4
+            order: 3
       x-walrus-ui:
         groupOrder:
         - Basic
