@@ -15,7 +15,7 @@ resource "helm_release" "cert_manager" {
   version    = var.helm_release_version
   namespace  = var.namespace_name
 
-  values = [file("${path.module}/values.yaml")]
+  # values = [file("${path.module}/values.yaml")]
 
   set {
     name  = "installCRDs"

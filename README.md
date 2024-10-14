@@ -8,7 +8,6 @@ Terraform module which deploys Cert-Manager on any kubernetes cluster.
 module "cert_manager" {
   source = "./modules/cert-manager"
 
-  cert_manager_crds_url = "https://github.com/cert-manager/cert-manager/releases/download/v1.15.3/cert-manager.crds.yaml" # URL to the Cert-Manager CRDs YAML file
   namespace_name        = "cert-manager" # Namespace where Cert-Manager will be installed  
   helm_release_name     = "cert-manager" # Name for the Cert-Manager Helm release
   helm_release_version  = "1.15.3" # Version of the Cert-Manager Helm chart
@@ -22,7 +21,7 @@ module "cert_manager" {
 
 ## Contributing
 
-Please read our [contributing guide](./docs/CONTRIBUTING.md) if you're interested in contributing to Walrus template.
+Please read our [contributing guide](./docs/CONTRIBUTING.md) if you're interested in contributing to Cert-Manager template.
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
@@ -55,7 +54,6 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_cert_manager_crds_url"></a> [cert_manager_crds_url](#input_cert_manager_crds_url) | URL to the Cert-Manager CRDs YAML file. | `string` | `"https://github.com/cert-manager/cert-manager/releases/download/v1.15.3/cert-manager.crds.yaml"` | no |
 | <a name="input_namespace_name"></a> [namespace_name](#input_namespace_name) | Namespace where Cert-Manager will be installed. | `string` | `"ccp-common"` | no |
 | <a name="input_helm_release_name"></a> [helm_release_name](#input_helm_release_name) | Name for the Cert-Manager Helm release. | `string` | `"cert-manager"` | no |
 | <a name="input_helm_release_version"></a> [helm_release_version](#input_helm_release_version) | Version of the Cert-Manager Helm chart. | `string` | `"1.15.3"` | no |
