@@ -54,7 +54,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_namespace_name"></a> [namespace_name](#input_namespace_name) | Namespace where Cert-Manager will be installed. | `string` | `"ccp-common"` | no |
+| <a name="input_namespace_name"></a> [namespace_name](#input_namespace_name) | Namespace where Cert-Manager will be installed. | `string` | `"cert-manager"` | no |
 | <a name="input_helm_release_name"></a> [helm_release_name](#input_helm_release_name) | Name for the Cert-Manager Helm release. | `string` | `"cert-manager"` | no |
 | <a name="input_helm_release_version"></a> [helm_release_version](#input_helm_release_version) | Version of the Cert-Manager Helm chart. | `string` | `"1.15.3"` | no |
 
