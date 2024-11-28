@@ -20,6 +20,21 @@ variable "helm_release_version" {
   default     = "1.15.3"
 }
 
+variable "resources" {
+  type = map(map(string))
+  default = {
+    limits = {
+      cpu    = "100m"
+      memory = "200Mi"
+    }
+    requests = {
+      cpu    = "50m"
+      memory = "128Mi"
+    }
+  }
+  description = "Resource limits and requests for the Cert-Manager Helm release."
+}
+
 #
 # Walrus Contextual Fields
 #
