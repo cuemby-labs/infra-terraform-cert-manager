@@ -1,4 +1,7 @@
+# Install CRDs
 installCRDs: true
+
+# Cert-Manager Pod resources
 resources:
   limits:
     cpu: ${limits_cpu}
@@ -6,7 +9,9 @@ resources:
   requests:
     cpu: ${request_cpu}
     memory: ${request_memory}
-cainjector
+
+# Cert-Manager cainjector Pod resources
+cainjector:
   resources:
     limits:
       cpu: ${limits_cpu}
@@ -14,7 +19,9 @@ cainjector
     requests:
       cpu: ${request_cpu}
       memory: ${request_memory}
-webhook
+
+# Cert-Manager webhook Pod resources
+webhook:
   resources:
     limits:
       cpu: ${limits_cpu}
