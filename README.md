@@ -10,7 +10,18 @@ module "cert_manager" {
 
   namespace_name        = "cert-manager" # Namespace where Cert-Manager will be installed  
   helm_release_name     = "cert-manager" # Name for the Cert-Manager Helm release
-  helm_release_version  = "1.15.3" # Version of the Cert-Manager Helm chart
+  helm_release_version  = "1.16.2" # Version of the Cert-Manager Helm chart
+
+  resources = {
+    limits = {
+      cpu    = "200m"
+      memory = "200Mi"
+    }
+    requests = {
+      cpu    = "100m"
+      memory = "128Mi"
+    }
+  }
 }
 ```
 
@@ -56,7 +67,8 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_namespace_name"></a> [namespace_name](#input_namespace_name) | Namespace where Cert-Manager will be installed. | `string` | `"cert-manager"` | no |
 | <a name="input_helm_release_name"></a> [helm_release_name](#input_helm_release_name) | Name for the Cert-Manager Helm release. | `string` | `"cert-manager"` | no |
-| <a name="input_helm_release_version"></a> [helm_release_version](#input_helm_release_version) | Version of the Cert-Manager Helm chart. | `string` | `"1.15.3"` | no |
+| <a name="input_helm_release_version"></a> [helm_release_version](#input_helm_release_version) | Version of the Cert-Manager Helm chart. | `string` | `"1.16.2"` | no |
+| <a name="input_resources"></a> [resources](#input_resources) | Resource limits and requests for Cert-Manager pods. | `map(map(string))` | `"See example"` | no |
 
 
 ## Outputs

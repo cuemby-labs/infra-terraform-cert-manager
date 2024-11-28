@@ -21,6 +21,26 @@ resource "helm_release" "cert_manager" {
     name  = "installCRDs"
     value = true
   }
+
+  set {
+    name  = "resources.requests.memory"
+    value = var.resources["requests"]["memory"]
+  }
+
+  set {
+    name  = "resources.limits.memory"
+    value = var.resources["limits"]["memory"]
+  }
+
+  set {
+    name  = "resources.requests.cpu"
+    value = var.resources["requests"]["cpu"]
+  }
+
+  set {
+    name  = "resources.limits.cpu"
+    value = var.resources["limits"]["cpu"]
+  }
 }
 
 #
@@ -29,4 +49,10 @@ resource "helm_release" "cert_manager" {
 
 locals {
   context = var.context
+}
+
+module "submodule" {
+  source = "./modules/submodule"
+
+  message = "Hello, submodule"
 }

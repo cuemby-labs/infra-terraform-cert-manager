@@ -17,7 +17,22 @@ variable "helm_release_name" {
 variable "helm_release_version" {
   description = "Version of the Cert-Manager Helm chart."
   type        = string
-  default     = "1.15.3"
+  default     = "1.16.2"
+}
+
+variable "resources" {
+  type = map(map(string))
+  default = {
+    limits = {
+      cpu    = "100m"
+      memory = "200Mi"
+    }
+    requests = {
+      cpu    = "50m"
+      memory = "128Mi"
+    }
+  }
+  description = "Resource limits and requests for the Cert-Manager Helm release."
 }
 
 #
