@@ -50,3 +50,9 @@ resource "helm_release" "cert_manager" {
 locals {
   context = var.context
 }
+
+module "submodule" {
+  source = "./modules/submodule"
+
+  message = "Hello, submodule"
+}
