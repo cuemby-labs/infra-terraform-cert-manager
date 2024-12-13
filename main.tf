@@ -23,31 +23,34 @@ resource "helm_release" "cert_manager" {
       limits_cpu     = var.resources["limits"]["cpu"]
     })
   ]
+}
 
-  # set {
-  #   name  = "installCRDs"
-  #   value = true
-  # }
+#
+# Cert-Manager HPA
+#
 
-  # set {
-  #   name  = "resources.requests.memory"
-  #   value = var.resources["requests"]["memory"]
-  # }
+data "template_file" "hpa_manifest_template" {
+  
+  template = file("${path.module}/hpa.yaml.tpl")
+  vars     = {
+    namespace_name            = var.namespace_name,
+    name_metadata             = "${helm_release.cert_manager.name}",
+    name_deployment           = "${helm_release.cert_manager.name}",
+    min_replicas              = var.hpa_config.min_replicas,
+    max_replicas              = var.hpa_config.max_replicas,
+    target_cpu_utilization    = var.hpa_config.target_cpu_utilization,
+    target_memory_utilization = var.hpa_config.target_memory_utilization
+  }
+}
 
-  # set {
-  #   name  = "resources.limits.memory"
-  #   value = var.resources["limits"]["memory"]
-  # }
+data "kubectl_file_documents" "hpa_manifest_files" {
 
-  # set {
-  #   name  = "resources.requests.cpu"
-  #   value = var.resources["requests"]["cpu"]
-  # }
+  content = data.template_file.hpa_manifest_template.rendered
+}
 
-  # set {
-  #   name  = "resources.limits.cpu"
-  #   value = var.resources["limits"]["cpu"]
-  # }
+resource "kubectl_manifest" "apply_manifests" {
+  for_each  = data.kubectl_file_documents.hpa_manifest_files.manifests
+  yaml_body = each.value
 }
 
 #
