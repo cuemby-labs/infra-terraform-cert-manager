@@ -26,7 +26,7 @@ components:
           title: Helm Release Version
           type: string
           description: Version of the Cert-Manager Helm chart.
-          default: 1.15.3
+          default: 1.16.2
           x-walrus-ui:
             group: Basic
             order: 3
@@ -51,6 +51,45 @@ components:
             colSpan: 12
             group: Basic
             order: 4
+        hpa_config:
+          title: Hpa Config
+          type: object
+          description: Configuration for the HPA targeting All Cert-Manager Deployments
+          default:
+            max_replicas: 3
+            min_replicas: 1
+            target_cpu_utilization: 80
+            target_memory_utilization: 80
+          required:
+          - max_replicas
+          - min_replicas
+          - target_cpu_utilization
+          - target_memory_utilization
+          properties:
+            max_replicas:
+              title: Max Replicas
+              type: number
+              x-walrus-ui:
+                order: 2
+            min_replicas:
+              title: Min Replicas
+              type: number
+              x-walrus-ui:
+                order: 1
+            target_cpu_utilization:
+              title: Target Cpu Utilization
+              type: number
+              x-walrus-ui:
+                order: 3
+            target_memory_utilization:
+              title: Target Memory Utilization
+              type: number
+              x-walrus-ui:
+                order: 4
+          x-walrus-ui:
+            colSpan: 12
+            group: Basic
+            order: 5
       x-walrus-ui:
         groupOrder:
         - Basic
