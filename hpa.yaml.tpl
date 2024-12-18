@@ -2,13 +2,13 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: ${name_metadata}
+  name: ${cert_manager}
   namespace: ${namespace_name}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: ${name_deployment}
+    name: ${cert_manager}
   minReplicas: ${min_replicas}
   maxReplicas: ${max_replicas}
   metrics:
@@ -28,13 +28,13 @@ spec:
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: ${name_metadata}-cainjector
+  name: ${cainjector}
   namespace: ${namespace_name}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: ${name_deployment}-cainjector
+    name: ${cainjector}
   minReplicas: ${min_replicas}
   maxReplicas: ${max_replicas}
   metrics:
@@ -54,13 +54,13 @@ spec:
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: ${name_metadata}-webhook
+  name: ${webhook}
   namespace: ${namespace_name}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: ${name_deployment}-webhook
+    name: ${webhook}
   minReplicas: ${min_replicas}
   maxReplicas: ${max_replicas}
   metrics:

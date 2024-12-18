@@ -33,17 +33,74 @@ components:
         resources:
           title: Resources
           type: object
-          description: Resource limits and requests for the Cert-Manager Helm release.
+          description: Resource limits and requests for Harbor Helm release.
           default:
-            limits:
-              cpu: 100m
-              memory: 200Mi
-            requests:
-              cpu: 50m
-              memory: 128Mi
+            cainjector:
+              limits:
+                cpu: 100m
+                memory: 100Mi
+              requests:
+                cpu: 50m
+                memory: 50Mi
+            cert_manager:
+              limits:
+                cpu: 100m
+                memory: 100Mi
+              requests:
+                cpu: 50m
+                memory: 50Mi
+            webhook:
+              limits:
+                cpu: 100m
+                memory: 100Mi
+              requests:
+                cpu: 50m
+                memory: 50Mi
           additionalProperties:
-            additionalProperties:
-              type: string
+            properties:
+              limits:
+                properties:
+                  cpu:
+                    title: Cpu
+                    type: string
+                    x-walrus-ui:
+                      order: 1
+                  memory:
+                    title: Memory
+                    type: string
+                    x-walrus-ui:
+                      order: 2
+                required:
+                - cpu
+                - memory
+                title: Limits
+                type: object
+                x-walrus-ui:
+                  colSpan: 12
+                  order: 1
+              requests:
+                properties:
+                  cpu:
+                    title: Cpu
+                    type: string
+                    x-walrus-ui:
+                      order: 1
+                  memory:
+                    title: Memory
+                    type: string
+                    x-walrus-ui:
+                      order: 2
+                required:
+                - cpu
+                - memory
+                title: Requests
+                type: object
+                x-walrus-ui:
+                  colSpan: 12
+                  order: 2
+            required:
+            - limits
+            - requests
             type: object
             x-walrus-ui:
               colSpan: 12

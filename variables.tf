@@ -21,18 +21,50 @@ variable "helm_release_version" {
 }
 
 variable "resources" {
-  type = map(map(string))
+  description = "Resource limits and requests for Harbor Helm release."
+  type        = map(object({
+    limits = object({
+      cpu    = string
+      memory = string
+    })
+    requests = object({
+      cpu    = string
+      memory = string
+    })
+  }))
+
   default = {
-    limits = {
-      cpu    = "100m"
-      memory = "200Mi"
+    cert_manager = {
+      limits = {
+        cpu    = "100m"
+        memory = "100Mi"
+      }
+      requests = {
+        cpu    = "50m"
+        memory = "50Mi"
+      }
     }
-    requests = {
-      cpu    = "50m"
-      memory = "128Mi"
+    cainjector = {
+      limits = {
+        cpu    = "100m"
+        memory = "100Mi"
+      }
+      requests = {
+        cpu    = "50m"
+        memory = "50Mi"
+      }
+    }
+    webhook = {
+      limits = {
+        cpu    = "100m"
+        memory = "100Mi"
+      }
+      requests = {
+        cpu    = "50m"
+        memory = "50Mi"
+      }
     }
   }
-  description = "Resource limits and requests for the Cert-Manager Helm release."
 }
 
 variable "hpa_config" {

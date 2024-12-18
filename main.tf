@@ -17,10 +17,18 @@ resource "helm_release" "cert_manager" {
 
   values = [
     templatefile("${path.module}/values.yaml.tpl", {
-      request_memory = var.resources["requests"]["memory"],
-      limits_memory  = var.resources["limits"]["memory"],
-      request_cpu    = var.resources["requests"]["cpu"],
-      limits_cpu     = var.resources["limits"]["cpu"]
+      cert_manager_request_memory = var.resources["cert_manager"]["requests"]["memory"],
+      cert_manager_limits_memory  = var.resources["cert_manager"]["limits"]["memory"],
+      cert_manager_request_cpu    = var.resources["cert_manager"]["requests"]["cpu"],
+      cert_manager_limits_cpu     = var.resources["cert_manager"]["limits"]["cpu"],
+      cainjector_request_memory   = var.resources["cainjector"]["requests"]["memory"],
+      cainjector_limits_memory    = var.resources["cainjector"]["limits"]["memory"],
+      cainjector_request_cpu      = var.resources["cainjector"]["requests"]["cpu"],
+      cainjector_limits_cpu       = var.resources["cainjector"]["limits"]["cpu"],
+      webhook_request_memory      = var.resources["webhook"]["requests"]["memory"],
+      webhook_limits_memory       = var.resources["webhook"]["limits"]["memory"],
+      webhook_request_cpu         = var.resources["webhook"]["requests"]["cpu"],
+      webhook_limits_cpu          = var.resources["webhook"]["limits"]["cpu"]
     })
   ]
 }
@@ -30,12 +38,12 @@ resource "helm_release" "cert_manager" {
 #
 
 data "template_file" "hpa_manifest_template" {
-  
   template = file("${path.module}/hpa.yaml.tpl")
   vars     = {
     namespace_name            = var.namespace_name,
-    name_metadata             = "${helm_release.cert_manager.name}",
-    name_deployment           = "${helm_release.cert_manager.name}",
+    cert_manager              = var.helm_release_name,
+    cainjector                = "${var.helm_release_name}-cainjector",
+    webhook                   = "${var.helm_release_name}-webhook",
     min_replicas              = var.hpa_config.min_replicas,
     max_replicas              = var.hpa_config.max_replicas,
     target_cpu_utilization    = var.hpa_config.target_cpu_utilization,
@@ -44,15 +52,19 @@ data "template_file" "hpa_manifest_template" {
 }
 
 data "kubectl_file_documents" "hpa_manifest_files" {
-
   content = data.template_file.hpa_manifest_template.rendered
 }
 
 resource "kubectl_manifest" "apply_manifests" {
   for_each  = data.kubectl_file_documents.hpa_manifest_files.manifests
   yaml_body = each.value
-}
 
+  lifecycle {
+    ignore_changes = [yaml_body]
+  }
+
+  depends_on = [data.kubectl_file_documents.hpa_manifest_files]
+}
 #
 # Walrus information
 #
